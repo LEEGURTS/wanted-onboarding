@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import SignInPage from "./pages/SignInPage";
+import SignUpPage from "./pages/SignUpPage";
+import IndexPage from "./pages/IndexPage";
+import ProtectedRoute from "./components/ProtectRoute/ProtectRoute";
 
-function App() {
+const App: React.FunctionComponent = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path="/" element={<IndexPage />} />
+        <Route element={<ProtectedRoute path="/todo" />}>
+          <Route path="/signin" element={<SignInPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+        </Route>
+        <Route element={<ProtectedRoute path="/signin" shouldLogin={false} />}>
+          <Route path="/todo" element={<div>TODO</div>} />
+        </Route>
+
+        <Route path="/*" element={<Navigate to="/" />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
