@@ -8,7 +8,7 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute: React.FunctionComponent<ProtectedRouteProps> = ({
   path,
-  shouldLogin = true,
+  shouldLogin = false,
 }) => {
   const [token, setToken] = useState(
     localStorage.getItem("access_token") || ""
@@ -16,18 +16,17 @@ const ProtectedRoute: React.FunctionComponent<ProtectedRouteProps> = ({
   const currentLocation = useLocation();
 
   useEffect(() => {
-    const handleStorage = (e: StorageEvent) => {
-      if (e.key === "access_token") {
-        setToken(e.newValue || "");
-      }
+    const handleLogin = () => {
+      console.log("login");
+      setToken(localStorage.getItem("access_token") || "");
     };
-    window.addEventListener("storage", handleStorage);
+    document.addEventListener("SignIn", handleLogin);
     return () => {
-      window.removeEventListener("storage", handleStorage);
+      document.removeEventListener("SignIn", handleLogin);
     };
   }, []);
 
-  return !token.length === shouldLogin ? (
+  return !!token.length === shouldLogin ? (
     <Outlet />
   ) : (
     <Navigate to={path} replace state={{ redirectedFrom: currentLocation }} />

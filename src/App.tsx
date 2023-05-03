@@ -9,12 +9,12 @@ const App: React.FunctionComponent = () => {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<IndexPage />} />
         <Route element={<ProtectedRoute path="/todo" />}>
+          <Route path="/" element={<IndexPage />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/signup" element={<SignUpPage />} />
         </Route>
-        <Route element={<ProtectedRoute path="/signin" shouldLogin={false} />}>
+        <Route element={<ProtectedRoute path="/signin" shouldLogin />}>
           <Route path="/todo" element={<div>TODO</div>} />
         </Route>
 
