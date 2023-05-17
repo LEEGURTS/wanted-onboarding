@@ -47,5 +47,6 @@
   "devDependencies": {
     "tailwindcss": "^3.3.2"
   },
-  "homepage": "https://LEEGURTS.github.io/wanted-onboarding/"
+  "homepage": "https://LEEGURTS.github.io/wanted-onboarding/",
+  "proxy": "https://www.pre-onboarding-selection-task.shop/"
 }

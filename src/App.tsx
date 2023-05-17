@@ -4,6 +4,7 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import IndexPage from "./pages/IndexPage";
 import ProtectedRoute from "./components/ProtectRoute/ProtectRoute";
+import TodoPage from "./pages/TodoPage";
 
 const App: React.FunctionComponent = () => {
   return (
@@ -15,7 +16,7 @@ const App: React.FunctionComponent = () => {
           <Route path="/signup" element={<SignUpPage />} />
         </Route>
         <Route element={<ProtectedRoute path="/signin" shouldLogin />}>
-          <Route path="/todo" element={<div>TODO</div>} />
+          <Route path="/todo" element={<TodoPage />} />
         </Route>
 
         <Route path="/*" element={<Navigate to="/" />} />
